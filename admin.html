@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Login | KV Academy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{background:#020617;color:white;text-align:center;font-family:Arial;padding:50px;}
+input,button{padding:12px;margin:10px;width:90%;border-radius:6px;border:none}
+button{background:#facc15;font-weight:bold;}
+.box{background:#1e293b;padding:30px;border-radius:10px;max-width:350px;margin:auto}
+</style>
+</head>
+<body>
+<h2>🛠 Admin Panel Login</h2>
+<div class="box">
+  <input type="text" id="user" placeholder="Admin Username">
+  <input type="password" id="pass" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+<script>
+function login(){
+  if(user.value==="admin" && pass.value==="kvacademy"){
+    window.location.href="dashboard.html";
+  }else{
+    alert("Wrong admin credentials!");
+  }
+}
+</script>
+</body>
+</html>
