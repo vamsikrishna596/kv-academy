@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><body>
+<h1>Admin Dashboard</h1>
+<h2>Upload Materials</h2>
+<input type="file" id="file"><button onclick="upload()">Upload</button>
+<h2>Add Question</h2>
+<input id="q"><input id="o1"><input id="o2"><input id="ans"><button onclick="saveQ()">Save</button>
+<script type="module">
+import { storage, db } from './firebase-config.js';
+import { ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+window.upload=()=>{let f=file.files[0];uploadBytes(ref(storage,'materials/'+f.name),f).then(()=>alert("OK"));};
+window.saveQ=()=>{addDoc(collection(db,'questions'),{q:q.value,o1:o1.value,o2:o2.value,ans:ans.value}).then(()=>alert("Saved"));};
+</script></body></html>
