@@ -1,10 +1,102 @@
-<!DOCTYPE html><html><head><title>Login</title></head>
-<body><h2>Student Login</h2>
-<input id="email"><input id="pass" type="password">
-<button id="login">Login</button>
-<script type="module">
-import { auth } from './firebase-config.js';
-import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-login.onclick=()=>{signInWithEmailAndPassword(auth,email.value,pass.value).then(()=>location='index.html').catch(()=>alert("Invalid"));};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KV Academy | Login</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+<script>
+/* 🔥 Firebase Config */
+const firebaseConfig = {
+  apiKey: "AIzaSyDauIQm8EkIwFCDS1zXNvRAw4KAHCYf1so",
+  authDomain: "kv-academy.firebaseapp.com",
+  databaseURL: "https://kv-academy-default-rtdb.firebaseio.com",
+  projectId: "kv-academy",
+  storageBucket: "kv-academy.appspot.com",
+  messagingSenderId: "540176448234",
+  appId: "1:540176448234:web:d468d6878f9639fd98f593"
+};
+firebase.initializeApp(firebaseConfig);
+
+
+/* 🚪 LOGIN FUNCTION */
+function login(){
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+
+  firebase.auth().signInWithEmailAndPassword(email, pass)
+  .then(user=>{
+      // 👇 Admin redirection rule
+      if(email.includes("admin")){
+        window.location.href = "dashboard_admin.html";
+      }else{
+        window.location.href = "dashboard_student.html";
+      }
+  })
+  .catch(err=>{
+      alert("❌ " + err.message);
+  });
+}
 </script>
-</body></html>
+
+<style>
+.login-bg{
+  height:100vh;
+  background:#eef2f6;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.login-box{
+  background:white;
+  padding:40px;
+  width:320px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 0 15px rgba(0,0,0,0.2);
+}
+.login-box img{
+  width:120px;
+  margin-bottom:10px;
+}
+.login-box input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+.login-box button{
+  width:100%;
+  padding:12px;
+  background:#002b57;
+  color:white;
+  border:none;
+  margin-top:10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.login-box button:hover{
+  background:#ffcd00;
+  color:#002b57;
+}
+</style>
+
+</head>
+<body class="login-bg">
+
+<div class="login-box">
+  <img src="kv-logo.png" alt="KV Academy Logo">
+  <h2>Welcome to KV Academy</h2>
+  <input type="email" id="email" placeholder="Enter Email" required>
+  <input type="password" id="password" placeholder="Enter Password" required>
+  <button onclick="login()">Login</button>
+</div>
+
+</body>
+</html>
