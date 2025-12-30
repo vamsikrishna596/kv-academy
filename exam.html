@@ -1,7 +1,0 @@
-<!DOCTYPE html><html><body><h2>Exam</h2>
-<script type="module">
-import { db } from './firebase-config.js';
-import { getDocs, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-let s=0; getDocs(collection(db,'questions')).then(ss=>{ss.forEach(d=>{let x=prompt(`${d.data().q}\n1)${d.data().o1}\n2)${d.data().o2}`);if(x==d.data().ans)s++;});alert("Score: "+s);});
-</script>
-</body></html>
